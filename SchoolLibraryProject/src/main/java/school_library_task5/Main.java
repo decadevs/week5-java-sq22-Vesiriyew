@@ -32,8 +32,9 @@ public class Main{
         Collections.sort(persons, new ComparatorLib());
 
         for(Person person: persons){
-            System.out.println(person.getFullName());
+            System.out.println(person.getRole());
         }
+
 
         //Implementation 2;
 
