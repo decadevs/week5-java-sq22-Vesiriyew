@@ -1,14 +1,16 @@
 package school_library_task5;
 
+import school_library_task5.enums.Role;
+import school_library_task5.models.*;
 import school_library_task5_library_service.Books;
-import school_library_task5_library_service.Gender;
+import school_library_task5.enums.Gender;
 import school_library_task5_library_service.Librarian;
 
 import java.util.*;
 
 public class Main{
     public static void main(String[] args) {
-        Teacher teacher = new Teacher("Mariam Bajah", 36, 2,1,Gender.FEMALE,Role.TEACHER);
+        Teacher teacher = new Teacher("Mariam Bajah", 36, 2,1,Gender.FEMALE, Role.TEACHER);
         SnrStudent snrStudent = new SnrStudent("John Paul", 18, 303,2, Gender.MALE, Role.SENIOR_STUDENT);
         JnrStudent jnrStudent= new JnrStudent("Ngozi Unegbu",12, 403, 3,Gender.FEMALE, Role.JUNIOR_STUDENT);
 
