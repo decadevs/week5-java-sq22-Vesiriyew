@@ -2,68 +2,53 @@ package school_library_task5;
 
 import school_library_task5.enums.Role;
 import school_library_task5.models.*;
-import school_library_task5_library_service.Books;
 import school_library_task5.enums.Gender;
-import school_library_task5_library_service.Librarian;
+import services.implementation.LibraryServiceImpl;
 
 import java.util.*;
 
 public class Main{
     public static void main(String[] args) {
-        Teacher teacher = new Teacher("Mariam Bajah", 36, 2,1,Gender.FEMALE, Role.TEACHER);
-        SnrStudent snrStudent = new SnrStudent("John Paul", 18, 303,2, Gender.MALE, Role.SENIOR_STUDENT);
-        JnrStudent jnrStudent= new JnrStudent("Ngozi Unegbu",12, 403, 3,Gender.FEMALE, Role.JUNIOR_STUDENT);
+
+        //Creating instances of the Person Class
+        Person juniorStudent = new Person("Mariam Bajah", 16, "J25", Gender.FEMALE, Role.JUNIOR_STUDENT);
+        Person seniorStudent = new Person("John Paul", 18, "J25", Gender.MALE, Role.SENIOR_STUDENT);
+        Person teacher = new Person("Ngozi Unegbu", 42, "T23", Gender.FEMALE, Role.TEACHER);
+        Person librarian = new Person("Ngo Unegbu", 42, "T23", Gender.FEMALE, Role.LIBRARIAN);
+
+        //Creating instances of the book class
+        Book book = new Book("Joys of Motherhood ", 2 , true);
+        Book book1 = new Book("Half a Yellow Sun ", 2, true);
+
+        LibraryServiceImpl libraryService = new LibraryServiceImpl();
+
+        //This Is To Add To The Queue
+        libraryService.addToQueue(juniorStudent);
+        libraryService.addToQueue(seniorStudent);
+        libraryService.addToQueue(teacher);
 
 
-        Books book1 = new Books("Things Fall Apart", "Chinua Achebe", 10);
-        Books book2 = new Books("The Thing Around Your Neck", "Chimamanda Adichie", 12);
+        //This is without Priority
+        libraryService.addToQueueOnFirstCome(juniorStudent);
+        libraryService.addToQueueOnFirstCome(seniorStudent);
+        libraryService.addToQueueOnFirstCome(teacher);
 
-        Person person1 = new Person("Mariam Bajah", 36, 111, 1, Gender.FEMALE, Role.TEACHER);
-        Person person2 = new Person("John Paul", 18, 303, 2, Gender.MALE, Role.SENIOR_STUDENT);
-        Person person3 = new Person("Ngozi Unegbu", 12, 403, 3, Gender.FEMALE, Role.JUNIOR_STUDENT);
-        //Implementation 1:
+        System.out.println("This is the Request ");
+        System.out.println(libraryService.requestBook(juniorStudent, book, "Junior Student"));
 
-        List<Person> persons = new ArrayList<>();
+        System.out.println("**************************************************");
 
-        persons.add(jnrStudent);
-        persons.add(teacher);
-        persons.add(snrStudent);
+        System.out.println("THIS IS WITH PRIORITY");
+        System.out.println(libraryService.borrowBook(book, librarian));
+        System.out.println(libraryService.borrowBook(book, librarian));
+        System.out.println(libraryService.borrowBook(book, librarian));
+        System.out.println("******************************************");
 
-        Collections.sort(persons, new ComparatorLib());
-
-        for(Person person: persons){
-            System.out.println(person.getRole());
-        }
-
-
-        //Implementation 2;
-
-        PriorityQueue<String> queue = new PriorityQueue<String>();
-
-        queue.add("jnrStudent");
-        queue.add("snrStudent");
-        queue.add("teacher");
-
-        Iterator<String> iterator = queue.iterator();
-
-        while (iterator.hasNext()){
-            System.out.println(iterator.next());
-        }
-
-        Librarian librarian = new Librarian();
-        librarian.updateBookInventory(book1);
-        librarian.updateBookInventory(book2);
-
-        ArrayList<Books> bookInventory = librarian.getBooks();
-
-        System.out.println(bookInventory);
-
-
-
-
-
-
-
+        System.out.println("THIS IS WITHOUT PRIORITY");
+        System.out.println(libraryService.getBookOnFirstCome(book1, librarian));
+        System.out.println(libraryService.getBookOnFirstCome(book1, librarian));
+        System.out.println(libraryService.getBookOnFirstCome(book1,librarian));
+        System.out.println("*****************************************************");
 
 
 
